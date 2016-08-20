@@ -1,34 +1,39 @@
 package com.mamacgroup.s5tv;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.astuetz.PagerSlidingTabStrip;
 
 
 public class MainActivity extends FragmentActivity {
-
+    private DrawerLayout mDrawerLayout;
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+       try {
+           Window window = getWindow();
+// clear FLAG_TRANSLUCENT_STATUS flag:
+           window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+           window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+// finally change the color
+           window.setStatusBarColor(getResources().getColor(R.color.aa_app_red));
+       }catch (Exception e){}
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);

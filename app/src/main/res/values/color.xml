@@ -6,9 +6,9 @@
     <color name="aa_app_white">#f7f7f7</color>
     <color name="aa_menu_bar_icon">#727272</color>
     <color name="aa_menu_line">#e0e0e0</color>
-    <color name="aa_menu_text">#696969</color>
+    <color name="aa_menu_text">#000000</color>
     <color name="aa_menu_text_selected">#1791d0</color>
-    <color name="settings_txt_color">#383838</color>
+    <color name="aa_nav_white">#edecec</color>
     <color name="settings_bg_color">#ecebf1</color>
     <color name="settings_line_color">#e0e0e0</color>
 </resources>
