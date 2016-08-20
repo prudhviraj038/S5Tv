@@ -1,6 +1,7 @@
 package com.mamacgroup.s5tv;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,14 +12,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.astuetz.PagerSlidingTabStrip;
 
 
 public class MainActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
+    LinearLayout live;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,15 @@ public class MainActivity extends FragmentActivity {
        }catch (Exception e){}
         mDrawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        live=(LinearLayout)findViewById(R.id.livw_tv_ll);
+        live.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,YoutubePlayer.class);
+                intent.putExtra("video","PLQWG4VdLKw");
+                startActivity(intent);
+            }
+        });
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
