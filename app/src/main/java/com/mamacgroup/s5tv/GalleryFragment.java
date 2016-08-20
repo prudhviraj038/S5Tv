@@ -1,6 +1,5 @@
 package com.mamacgroup.s5tv;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,11 +17,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +28,7 @@ import java.util.ArrayList;
 /**
  * Created by HP on 7/26/2016.
  */
-public class TestFragment extends Fragment {
+public class GalleryFragment extends Fragment {
     ArrayList<News> newses;
     private static final String ARG_POSITION = "position";
     private static final String ARG_NAME = "name";
@@ -43,8 +40,8 @@ public class TestFragment extends Fragment {
     TextView title,description,date,author;
     NetworkImageView imageView;
     ProgressBar progressBar;
-    public static TestFragment newInstance(int position,String name) {
-        TestFragment f = new TestFragment();
+    public static GalleryFragment newInstance(int position,String name) {
+        GalleryFragment f = new GalleryFragment();
         Bundle b = new Bundle();
         b.putInt(ARG_POSITION, position);
         b.putString(ARG_NAME, name);
@@ -55,7 +52,7 @@ public class TestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.test_layout, container, false);
+        return inflater.inflate(R.layout.gallery_layout, container, false);
     }
 
     @Override
@@ -118,8 +115,8 @@ public class TestFragment extends Fragment {
         progressDialog.setMessage("please_wait");
         progressDialog.show();
         progressDialog.setCancelable(false);
-
        */
+
         progressBar.setVisibility(View.VISIBLE);
         String url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php?type="+name.toLowerCase();
         Log.e("url", url);
