@@ -11,119 +11,20 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.astuetz.PagerSlidingTabStrip;
 
 
 public class MainActivity extends FragmentActivity {
-    LinearLayout home,livetv,search,news,ap,telangana,sports,videos,hyd,cinema,adults,gallery;
     private DrawerLayout mDrawerLayout;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        home = (LinearLayout)findViewById(R.id.home_ll);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-       search = (LinearLayout)findViewById(R.id.search_ll);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        livetv = (LinearLayout)findViewById(R.id.livetv_ll);
-        livetv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        news = (LinearLayout)findViewById(R.id.news_ll);
-        news.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        ap = (LinearLayout)findViewById(R.id.ap_ll);
-        ap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        telangana = (LinearLayout)findViewById(R.id.telangana_ll);
-        telangana.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        sports = (LinearLayout)findViewById(R.id.sports_ll);
-        sports.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        adults = (LinearLayout)findViewById(R.id.adults_ll);
-        adults.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        videos = (LinearLayout)findViewById(R.id.videos_ll);
-        videos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        hyd = (LinearLayout)findViewById(R.id.hyd_ll);
-        hyd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        gallery = (LinearLayout)findViewById(R.id.gallery_ll);
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        cinema = (LinearLayout)findViewById(R.id.cinema_ll);
-        cinema.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-
-        try {
-           Window window = getWindow();
-// clear FLAG_TRANSLUCENT_STATUS flag:
-           window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-           window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-// finally change the color
-           window.setStatusBarColor(getResources().getColor(R.color.aa_app_red));
-       }catch (Exception e){}
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
+       mDrawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -158,7 +59,10 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return TestFragment.newInstance(position,TITLES[position]);
+            if(TITLES[position].equals("Gallery"))
+                return GalleryFragment.newInstance(position,TITLES[position]);
+            else
+                return TestFragment.newInstance(position,TITLES[position]);
         }
 
         @Override

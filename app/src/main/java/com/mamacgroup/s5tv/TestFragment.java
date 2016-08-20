@@ -3,6 +3,7 @@ package com.mamacgroup.s5tv;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -84,7 +85,7 @@ public class TestFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 viewFlipper.setDisplayedChild(1);
                 title.setText(newses.get(position).title);
-                description.setText(newses.get(position).title);
+                description.setText(Html.fromHtml(newses.get(position).data));
                 ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                         .getImageLoader();
                 imageLoader.get(newses.get(position).image, ImageLoader.getImageListener(imageView,
@@ -121,7 +122,12 @@ public class TestFragment extends Fragment {
 
        */
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php?type="+name.toLowerCase();
+        String url;
+        if(position==0)
+             url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php";
+        else
+
+         url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php?type="+name.toLowerCase();
         Log.e("url", url);
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET,url,null, new Response.Listener<JSONObject>() {
             @Override
