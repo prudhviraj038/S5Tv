@@ -1,38 +1,179 @@
 package com.mamacgroup.s5tv;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
 
 public class MainActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
+    TextView live_txt;
+    ImageView live_img,menu_btn;
+    LinearLayout home,livetv,search,news,ap,telangana,sports,videos,hyd,cinema,adults,gallery,live_tv_ll_header;
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        live_tv_ll_header = (LinearLayout)findViewById(R.id.livw_tv_ll);
+        live_tv_ll_header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,YoutubePlayer.class);
+                intent.putExtra("video", "PLQWG4VdLKw");
+                startActivity(intent);
+            }
+        });
+        live_txt = (TextView) findViewById(R.id.live_txtview);
+        live_img =(ImageView) findViewById(R.id.live_imageview);
+        live_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,YoutubePlayer.class);
+                intent.putExtra("video", "PLQWG4VdLKw");
+                startActivity(intent);
+            }
+        });
+        live_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                live_txt.performClick();
+            }
+        });
+        home = (LinearLayout)findViewById(R.id.home_ll);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(0);
+            }
+        });
+        search = (LinearLayout)findViewById(R.id.search_ll);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
+        livetv = (LinearLayout)findViewById(R.id.livetv_ll);
+        livetv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*if(mDrawerLayout.isDrawerOpen(GravityCompat.START));
+                mDrawerLayout.closeDrawer(GravityCompat.START);*/
+                Intent intent = new Intent(MainActivity.this,YoutubePlayer.class);
+                intent.putExtra("video", "PLQWG4VdLKw");
+                startActivity(intent);
+
+            }
+        });
+        news = (LinearLayout)findViewById(R.id.news_ll);
+        news.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(1);
+            }
+        });
+        ap = (LinearLayout)findViewById(R.id.ap_ll);
+        ap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(3);
+            }
+        });
+        telangana = (LinearLayout)findViewById(R.id.telangana_ll);
+        telangana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(2);
+            }
+        });
+        sports = (LinearLayout)findViewById(R.id.sports_ll);
+        sports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(6);
+            }
+        });
+        adults = (LinearLayout)findViewById(R.id.adults_ll);
+        adults.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(8);
+            }
+        });
+        videos = (LinearLayout)findViewById(R.id.videos_ll);
+        videos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(4);
+            }
+        });
+        hyd = (LinearLayout)findViewById(R.id.hyd_ll);
+        hyd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(7);
+            }
+        });
+        gallery = (LinearLayout)findViewById(R.id.gallery_ll);
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(9);
+            }
+        });
+        cinema = (LinearLayout)findViewById(R.id.cinema_ll);
+        cinema.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(5);
+            }
+        });
        mDrawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        menu_btn = (ImageView) findViewById(R.id.menu_icon);
+        menu_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
 
     }
 
-
+    ViewPager pager;
     private class MyPagerAdapter extends  FragmentPagerAdapter{
         //ap,adults, cinema , telangana , sports ,  video , gallery  , hyd
         private final String[] TITLES = {
