@@ -40,7 +40,7 @@ public class TestFragment extends Fragment {
     private int position;
     private String name;
     ListView listView;
-    ViewFlipper viewFlipper ;
+    ViewFlipper viewFlipper;
     TextView title,description,date,author;
     NetworkImageView imageView;
     ProgressBar progressBar;

@@ -53,7 +53,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Category Page Title"
-                            android:id="@+id/gallery_title2"
+                            android:id="@+id/Video_title2"
                             android:textColor="@color/aa_app_white"
                             android:textSize="14dp"
                             android:layout_gravity="center_horizontal"
@@ -75,7 +75,7 @@
                 <com.android.volley.toolbox.NetworkImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/img_gallery_details"
+                    android:id="@+id/img_Video_details"
                     android:scaleType="centerCrop"
                     android:src="@drawable/nwessss"
                     android:visibility="gone" />
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Category Page Title"
-                    android:id="@+id/gallery_title"
+                    android:id="@+id/Video_title"
                     android:textColor="@color/aa_app_white"
                     android:textSize="18sp"
                     android:layout_gravity="center_horizontal"
