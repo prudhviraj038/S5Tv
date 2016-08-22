@@ -2,6 +2,7 @@ package com.mamacgroup.s5tv;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -140,7 +141,11 @@ public class GalleryFragment extends Fragment {
 
 
      }
-
+    private static ViewPager mPager;
+    private static int currentPage = 0;
+    private static int NUM_PAGES = 0;
+    private static final Integer[] IMAGES= {R.drawable.nwessss,R.drawable.nwessss,R.drawable.nwessss,R.drawable.nwessss};
+    private ArrayList<Integer> ImagesArray = new ArrayList<Integer>();
     private void get_news(){
 
        /* final ProgressDialog progressDialog = new ProgressDialog(getActivity());
