@@ -18,6 +18,94 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <GridView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gridView"
+                    android:numColumns="2"
+                    android:verticalSpacing="5dp"
+                    android:horizontalSpacing="5dp"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category Page Title"
+                    android:id="@+id/Video_title"
+                    android:textColor="@color/aa_app_white"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:id="@+id/imageView"
+                        android:src="@drawable/clock_icon_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2016-07-21 15:46:29"
+                        android:id="@+id/textView16"
+                        android:textColor="@color/aa_app_white"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:id="@+id/imageView18"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/man_icon_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Surya"
+                        android:id="@+id/textView17"
+                        android:textColor="@color/aa_app_white"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <GridView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gridView2"
+                    android:numColumns="1"
+                    android:layout_margin="5dp"
+                    android:horizontalSpacing="5dp"
+                    android:verticalSpacing="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
@@ -98,92 +186,6 @@
 
                 </RelativeLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <GridView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/gridView"
-                    android:numColumns="2"
-                    android:verticalSpacing="5dp"
-                    android:horizontalSpacing="5dp"
-                    android:layout_margin="5dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Category Page Title"
-                    android:id="@+id/Video_title"
-                    android:textColor="@color/aa_app_white"
-                    android:textSize="18sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:singleLine="true"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:layout_marginBottom="5dp">
-
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:id="@+id/imageView"
-                        android:src="@drawable/clock_icon_white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2016-07-21 15:46:29"
-                        android:id="@+id/textView16"
-                        android:textColor="@color/aa_app_white"
-                        android:textSize="16sp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="10dp" />
-
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:id="@+id/imageView18"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/man_icon_white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Surya"
-                        android:id="@+id/textView17"
-                        android:textColor="@color/aa_app_white"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <GridView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/gridView2"
-                    android:numColumns="2"
-                    android:verticalSpacing="5dp"
-                    android:horizontalSpacing="5dp"
-                    android:layout_margin="5dp" />
             </LinearLayout>
 
         </ViewFlipper>

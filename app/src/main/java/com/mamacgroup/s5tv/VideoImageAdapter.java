@@ -57,8 +57,8 @@ public class VideoImageAdapter extends BaseAdapter{
         Holder holder=new Holder();
         View rowView;
         rowView = inflater.inflate(R.layout.video_image_item, null);
-      //  holder.title=(TextView) rowView.findViewById(R.id.news_tv);
-      //  holder.title.setText(VideoCategories.get(position).title);
+        holder.title=(TextView) rowView.findViewById(R.id.news_tv);
+        holder.title.setText(videoCategories.get(position).title);
         holder.img=(NetworkImageView) rowView.findViewById(R.id.news_img);
         Log.e("img", videoCategories.get(position).image);
        // Picasso.with(context).load("http://image.flaticon.com/teams/1-freepik.jpg").into(holder.img);

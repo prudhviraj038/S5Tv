@@ -55,9 +55,9 @@ ArrayList<VideoCategory> videoCategories;
         Holder holder=new Holder();
         View rowView;
         rowView = inflater.inflate(R.layout.video_cat_item, null);
-        holder.title=(TextView) rowView.findViewById(R.id.news_tv);
+        holder.title=(TextView) rowView.findViewById(R.id.video_news_tv);
         holder.title.setText(videoCategories.get(position).title);
-        holder.img=(NetworkImageView) rowView.findViewById(R.id.news_img);
+        holder.img=(NetworkImageView) rowView.findViewById(R.id.video_news_img);
         Log.e("img", videoCategories.get(position).image);
        // Picasso.with(context).load("http://image.flaticon.com/teams/1-freepik.jpg").into(holder.img);
 

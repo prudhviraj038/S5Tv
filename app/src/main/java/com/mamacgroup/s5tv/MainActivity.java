@@ -22,8 +22,18 @@ import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import java.util.HashMap;
+import java.util.List;
+
 
 public class MainActivity extends FragmentActivity {
+    private List<String> _listDataHeader;
+    private HashMap<String, List<String>> _listDataChild;
+
+    private List<String> home_data;
+    private List<String> news_data;
+
+
     private DrawerLayout mDrawerLayout;
     TextView live_txt;
     ImageView live_img,menu_btn;
@@ -200,7 +210,9 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if(TITLES[position].equals("Gallery"))
+            if(TITLES[position].equals("Videos"))
+                return VideoFragment.newInstance(position,TITLES[position]);
+            else if(TITLES[position].equals("Gallery"))
                 return GalleryFragment.newInstance(position,TITLES[position]);
             else
                 return TestFragment.newInstance(position,TITLES[position]);

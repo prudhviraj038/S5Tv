@@ -2,6 +2,7 @@ package com.mamacgroup.s5tv;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
  * Created by HP on 7/26/2016.
  */
 public class TestFragment extends Fragment {
+    ArrayList<News> newses_mini;
     ArrayList<News> newses;
     private static final String ARG_POSITION = "position";
     private static final String ARG_NAME = "name";
@@ -44,6 +47,8 @@ public class TestFragment extends Fragment {
     TextView title,description,date,author;
     NetworkImageView imageView;
     ProgressBar progressBar;
+    NetworkImageView header_news_image1,header_news_image2;
+    TextView header_news_txt1,header_news_txt2;
     public static TestFragment newInstance(int position,String name) {
         TestFragment f = new TestFragment();
         Bundle b = new Bundle();
@@ -69,7 +74,9 @@ public class TestFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = getView();
+        View header_view = getActivity().getLayoutInflater().inflate(R.layout.listview_header,null);
         newses=new ArrayList<>();
+        newses_mini = new ArrayList<>();
         name=(String)getArguments().getSerializable(ARG_NAME);
         Log.e("name", name);
         TextView label = (TextView) view.findViewById(R.id.label);
@@ -79,19 +86,79 @@ public class TestFragment extends Fragment {
         imageView = (NetworkImageView) view.findViewById(R.id.img_details);
         label.setText("position:"+String.valueOf(position)+ "--->"+ "name:"+name);
         listView = (ListView) view.findViewById(R.id.listView);
+        listView.addHeaderView(header_view);
+        header_news_image1 = (NetworkImageView) view.findViewById(R.id.header_news_image1);
+        header_news_image2 = (NetworkImageView) view.findViewById(R.id.header_newsimage2);
+        header_news_txt1 = (TextView) view.findViewById(R.id.header_news_title1);
+        header_news_txt2 = (TextView) view.findViewById(R.id.header_news_title2);
         viewFlipper = (ViewFlipper) view.findViewById(R.id.viewFlipper);
+        header_news_image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewFlipper.setDisplayedChild(1);
+                title.setText(newses_mini.get(0).title);
+                description.setText(Html.fromHtml(newses_mini.get(0).data));
+
+                ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
+                        .getImageLoader();
+                imageLoader.get(newses_mini.get(0).image, ImageLoader.getImageListener(imageView,
+                        R.drawable.nwessss, android.R.drawable
+                                .ic_dialog_alert));
+                imageView.setImageUrl(newses_mini.get(0).image, imageLoader);
+
+
+            }
+        });
+        header_news_txt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                header_news_image1.performClick();
+            }
+        });
+
+        header_news_image2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewFlipper.setDisplayedChild(1);
+                title.setText(newses_mini.get(1).title);
+                description.setText(Html.fromHtml(newses_mini.get(1).data));
+
+                ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
+                        .getImageLoader();
+                imageLoader.get(newses_mini.get(1).image, ImageLoader.getImageListener(imageView,
+                        R.drawable.nwessss, android.R.drawable
+                                .ic_dialog_alert));
+                imageView.setImageUrl(newses_mini.get(1).image, imageLoader);
+
+            }
+        });
+
+        header_news_txt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                header_news_image2.performClick();
+            }
+        });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                viewFlipper.setDisplayedChild(1);
-                title.setText(newses.get(position).title);
-                description.setText(Html.fromHtml(newses.get(position).data));
-                ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
-                        .getImageLoader();
-                imageLoader.get(newses.get(position).image, ImageLoader.getImageListener(imageView,
-                        R.drawable.nwessss, android.R.drawable
-                                .ic_dialog_alert));
-                imageView.setImageUrl(newses.get(position).image, imageLoader);
+                try {
+                    title.setText(newses.get(position).title);
+                    description.setText(Html.fromHtml(newses.get(position).data));
+                    ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
+                            .getImageLoader();
+                    imageLoader.get(newses.get(position).image, ImageLoader.getImageListener(imageView,
+                            R.drawable.nwessss, android.R.drawable
+                                    .ic_dialog_alert));
+                    imageView.setImageUrl(newses.get(position).image, imageLoader);
+
+                    viewFlipper.setDisplayedChild(1);
+
+
+                                    }catch (Exception ex){
+
+                }
 
             }
         });
@@ -141,6 +208,9 @@ public class TestFragment extends Fragment {
                     try {
                         for(int i=0;i<jsonObject.getJSONArray("categories").length();i++) {
                             JSONObject jsonObject1 = jsonObject.getJSONArray("categories").getJSONObject(i);
+                            if(newses_mini.size()<2)
+                                newses_mini.add(new News(jsonObject1));
+                            else
                             newses.add(new News(jsonObject1));
                         }
                     } catch (JSONException e) {
@@ -148,6 +218,26 @@ public class TestFragment extends Fragment {
                     }
                 newsListAdapter=new NewsListAdapter(getActivity(),newses);
                 listView.setAdapter(newsListAdapter);
+                if(newses_mini.size()>0){
+                    header_news_txt1.setText(newses_mini.get(0).title);
+                    ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
+                            .getImageLoader();
+                    imageLoader.get(newses_mini.get(0).image, ImageLoader.getImageListener(header_news_image1,
+                            R.drawable.nwessss, android.R.drawable
+                                    .ic_dialog_alert));
+                    header_news_image1.setImageUrl(newses_mini.get(0).image, imageLoader);
+
+                }
+                if(newses_mini.size()>1){
+                    header_news_txt2.setText(newses_mini.get(1).title);
+                    ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
+                            .getImageLoader();
+                    imageLoader.get(newses_mini.get(1).image, ImageLoader.getImageListener(header_news_image2,
+                            R.drawable.nwessss, android.R.drawable
+                                    .ic_dialog_alert));
+                    header_news_image2.setImageUrl(newses_mini.get(1).image, imageLoader);
+
+                }
                 newsListAdapter.notifyDataSetChanged();
                 }
         }, new Response.ErrorListener() {

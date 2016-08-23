@@ -1,5 +1,6 @@
 package com.mamacgroup.s5tv;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -19,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
@@ -26,6 +28,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -105,7 +108,12 @@ public class VideoFragment extends Fragment {
         gridView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                viewFlipper.setDisplayedChild(2);
+
+                Intent intent = new Intent(getActivity(),YoutubePlayer.class);
+                intent.putExtra("video", VideoImages.get(position).link);
+                startActivity(intent);
+
+                /*viewFlipper.setDisplayedChild(2);
                   ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                         .getImageLoader();
                 imageLoader.get(VideoImages.get(position).image, ImageLoader.getImageListener(imageView,
@@ -113,7 +121,7 @@ public class VideoFragment extends Fragment {
                                 .ic_dialog_alert));
                 imageView.setImageUrl(VideoImages.get(position).image, imageLoader);
                 mDemoSlider.setCurrentPosition(position);
-
+*/
             }
         });
 
@@ -153,7 +161,7 @@ public class VideoFragment extends Fragment {
        */
 
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://clients.outlinedesigns.in/s5tv/api/category-json.php?type=Video";
+        String url = "http://clients.outlinedesigns.in/s5tv/api/category-json.php?type=videos";
         Log.e("url", url);
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET,url,null, new Response.Listener<JSONObject>() {
             @Override
@@ -200,11 +208,11 @@ public class VideoFragment extends Fragment {
        */
 
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://clients.outlinedesigns.in/s5tv/api/Video-json.php?category="+id;
+        String url = "http://clients.outlinedesigns.in/s5tv/api/videos-json.php?parent_id="+id;
         Log.e("url", url);
-        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET,url,null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
+            public void onResponse(JSONArray jsonObject) {
                 Log.e("response", jsonObject.toString());
                 /*if(progressDialog!=null)
                     progressDialog.dismiss();
@@ -212,8 +220,8 @@ public class VideoFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
                 VideoImages.clear();
                 try {
-                    for(int i=0;i<jsonObject.getJSONArray("Video").length();i++) {
-                        JSONObject jsonObject1 = jsonObject.getJSONArray("Video").getJSONObject(i);
+                    for(int i=0;i<jsonObject.length();i++) {
+                        JSONObject jsonObject1 = jsonObject.getJSONObject(i);
                         VideoImages.add(new VideoImage(jsonObject1));
                     }
                 } catch (JSONException e) {
@@ -222,17 +230,7 @@ public class VideoFragment extends Fragment {
                 videoimageadapter = new VideoImageAdapter(getActivity(), VideoImages);
                 gridView2.setAdapter(videoimageadapter);
                 videoimageadapter.notifyDataSetChanged();
-                for (int i = 0; i < VideoImages.size(); i++) {
-                    DefaultSliderView defaultSliderView = new DefaultSliderView(getActivity());
-                   // TextSliderView textSliderView = new TextSliderView(getActivity());
-                    // initialize a SliderLayout
-                    defaultSliderView
-                            .description(String.valueOf(Html.fromHtml(VideoImages.get(i).image)))
-                            .image(VideoImages.get(i).image).setScaleType(BaseSliderView.ScaleType.CenterCrop);
-                    mDemoSlider.addSlider(defaultSliderView);
 
-
-                }
 
             }
         }, new Response.ErrorListener() {

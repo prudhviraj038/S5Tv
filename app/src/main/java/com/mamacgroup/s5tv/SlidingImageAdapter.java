@@ -12,18 +12,21 @@ package com.mamacgroup.s5tv;
         import android.view.ViewGroup;
         import android.widget.ImageView;
 
+        import com.android.volley.toolbox.ImageLoader;
+        import com.android.volley.toolbox.NetworkImageView;
+
         import java.util.ArrayList;
 
 
 public class SlidingImageAdapter extends PagerAdapter {
 
 
-    private ArrayList<Integer> IMAGES;
+    private ArrayList<GalleryImage> IMAGES;
     private LayoutInflater inflater;
     private Context context;
 
 
-    public SlidingImageAdapter(Context context,ArrayList<Integer> IMAGES) {
+    public SlidingImageAdapter(Context context,ArrayList<GalleryImage> IMAGES) {
         this.context = context;
         this.IMAGES=IMAGES;
         inflater = LayoutInflater.from(context);
@@ -44,11 +47,19 @@ public class SlidingImageAdapter extends PagerAdapter {
         View imageLayout = inflater.inflate(R.layout.slidingimages_layout, view, false);
 
         assert imageLayout != null;
-        final ImageView imageView = (ImageView) imageLayout
+        final NetworkImageView imageView = (NetworkImageView) imageLayout
                 .findViewById(R.id.image);
 
 
-        imageView.setImageResource(IMAGES.get(position));
+       // imageView.setImageResource(IMAGES.get(position));
+
+        ImageLoader imageLoader = CustomVolleyRequest.getInstance(context)
+                .getImageLoader();
+        imageLoader.get(IMAGES.get(position).image, ImageLoader.getImageListener(imageView,
+                R.drawable.nwessss, android.R.drawable
+                        .ic_dialog_alert));
+        imageView.setImageUrl(IMAGES.get(position).image, imageLoader);
+
 
         view.addView(imageLayout, 0);
 

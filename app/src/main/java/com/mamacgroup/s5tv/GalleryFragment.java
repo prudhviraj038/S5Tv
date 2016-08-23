@@ -50,6 +50,7 @@ public class GalleryFragment extends Fragment {
     NetworkImageView imageView;
     ProgressBar progressBar;
     TextView gallery_title,gallery_title2;
+    TextView gallery_next,gallery_previous;
     private SliderLayout mDemoSlider;
     public static GalleryFragment newInstance(int position,String name) {
         GalleryFragment f = new GalleryFragment();
@@ -89,6 +90,28 @@ public class GalleryFragment extends Fragment {
         imageView = (NetworkImageView) view.findViewById(R.id.img_gallery_details);
         gallery_title = (TextView) view.findViewById(R.id.gallery_title);
         gallery_title2 = (TextView) view.findViewById(R.id.gallery_title2);
+        gallery_next = (TextView) view.findViewById(R.id.next);
+        gallery_previous = (TextView) view.findViewById(R.id.previous);
+        gallery_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+                }catch (Exception e){
+
+                }
+            }
+        });
+        gallery_previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    mPager.setCurrentItem(mPager.getCurrentItem() + 1);
+                }catch (Exception e){
+
+                }
+            }
+        });
         gridView = (GridView) view.findViewById(R.id.gridView);
         gridView2 = (GridView) view.findViewById(R.id.gridView2);
         viewFlipper = (ViewFlipper) view.findViewById(R.id.viewFlipper);
@@ -114,7 +137,7 @@ public class GalleryFragment extends Fragment {
                         R.drawable.nwessss, android.R.drawable
                                 .ic_dialog_alert));
                 imageView.setImageUrl(galleryImages.get(position).image, imageLoader);
-                mDemoSlider.setCurrentPosition(position);
+               // mDemoSlider.setCurrentPosition(position);
 
             }
         });
@@ -129,8 +152,7 @@ public class GalleryFragment extends Fragment {
                     if (viewFlipper.getDisplayedChild() == 1) {
                         viewFlipper.setDisplayedChild(0);
                         return true;
-                    }
-                    else if (viewFlipper.getDisplayedChild() == 2) {
+                    } else if (viewFlipper.getDisplayedChild() == 2) {
                         viewFlipper.setDisplayedChild(1);
                         return true;
                     }
@@ -138,14 +160,79 @@ public class GalleryFragment extends Fragment {
                 return false;
             }
         });
+        mPager = (ViewPager) view.findViewById(R.id.pager);
+        init();
+         /*indicator = (CirclePageIndicator)
+                view.findViewById(R.id.indicator);
+*/
 
-
-     }
+    }
+   // CirclePageIndicator indicator;
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
     private static final Integer[] IMAGES= {R.drawable.nwessss,R.drawable.nwessss,R.drawable.nwessss,R.drawable.nwessss};
     private ArrayList<Integer> ImagesArray = new ArrayList<Integer>();
+    private void init() {
+        for(int i=0;i<IMAGES.length;i++)
+            ImagesArray.add(IMAGES[i]);
+
+
+
+        mPager.setAdapter(new SlidingImageAdapter(getActivity(),galleryImages));
+
+
+
+        /*CirclePageIndicator indicator = (CirclePageIndicator)
+                findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
+*/
+        final float density = getResources().getDisplayMetrics().density;
+
+//Set circle indicator radius
+        //indicator.setRadius(5 * density);
+
+        NUM_PAGES =IMAGES.length;
+
+        // Auto start of viewpager
+        /*final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == NUM_PAGES) {
+                    currentPage = 0;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 3000, 3000);
+*/
+        // Pager listener over indicator
+        /*indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                currentPage = position;
+
+            }
+
+            @Override
+            public void onPageScrolled(int pos, float arg1, int arg2) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int pos) {
+
+            }
+        });
+*/
+    }
     private void get_news(){
 
        /* final ProgressDialog progressDialog = new ProgressDialog(getActivity());
@@ -224,7 +311,8 @@ public class GalleryFragment extends Fragment {
                 galleryImageAdapter = new GalleryImageAdapter(getActivity(), galleryImages);
                 gridView2.setAdapter(galleryImageAdapter);
                 galleryImageAdapter.notifyDataSetChanged();
-                for (int i = 0; i < galleryImages.size(); i++) {
+                init();
+                /*for (int i = 0; i < galleryImages.size(); i++) {
                     DefaultSliderView defaultSliderView = new DefaultSliderView(getActivity());
                    // TextSliderView textSliderView = new TextSliderView(getActivity());
                     // initialize a SliderLayout
@@ -234,7 +322,7 @@ public class GalleryFragment extends Fragment {
                     mDemoSlider.addSlider(defaultSliderView);
 
 
-                }
+                }*/
 
             }
         }, new Response.ErrorListener() {

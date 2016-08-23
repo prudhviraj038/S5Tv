@@ -17,12 +17,12 @@ public class VideoImage implements Serializable {
         title_te="";
         try {
             id=jsonObject.getString("id");
-          //  title=jsonObject.getString("title");
+            title=jsonObject.getString("title");
         //    title_te=jsonObject.getString("title_te");
             image=jsonObject.getString("image");
           //  data=jsonObject.getString("description");
          //   data_te=jsonObject.getString("description_te");
-//            link=jsonObject.getString("link");
+            link=jsonObject.getString("script");
 //            is_urgent=jsonObject.getString("is_urgent");
 //            now=jsonObject.getString("times");
 //            JSONObject jsonObject2 =jsonObject.getJSONObject("chanel");
