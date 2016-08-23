@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -40,10 +43,13 @@ public class HomeFragment extends Fragment {
     ListView listView;
     ViewFlipper viewFlipper;
     TextView title,description,date,author;
+    EditText search;
+    LinearLayout serach_ll;
     NetworkImageView imageView;
     ProgressBar progressBar;
     NetworkImageView header_news_imagefull,header_news_image1,header_news_image2;
     TextView header_news_txtfull,header_news_txt1,header_news_txt2;
+    ImageView search_image;
 
     public static HomeFragment newInstance(int position,String name) {
         HomeFragment f = new HomeFragment();
@@ -57,7 +63,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.test_layout, container, false);
+        return inflater.inflate(R.layout.home_layout, container, false);
     }
 
     @Override
@@ -90,6 +96,32 @@ public class HomeFragment extends Fragment {
         header_news_txt1 = (TextView) view.findViewById(R.id.header_news_title1);
         header_news_txt2 = (TextView) view.findViewById(R.id.header_news_title2);
         viewFlipper = (ViewFlipper) view.findViewById(R.id.viewFlipper);
+        search = (EditText) view.findViewById(R.id.search_et);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        search_image =(ImageView)view.findViewById(R.id.search_icon);
+        search_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (search.getText()!=null)
+                get_news("?search="+search.getText().toString());
+                else {
+                    get_news("");
+                }
+            }
+        });
+        serach_ll = (LinearLayout)view.findViewById(R.id.search_ll);
+        serach_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
         header_news_imagefull.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,7 +218,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        get_news();
+        get_news("");
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -205,7 +237,7 @@ public class HomeFragment extends Fragment {
 
      }
 
-    private void get_news(){
+    private void get_news(String key){
        /* final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("please_wait");
         progressDialog.show();
@@ -219,6 +251,7 @@ public class HomeFragment extends Fragment {
         else
 
          url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php?type="+name.toLowerCase();
+        url = url+key;
         Log.e("url", url);
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET,url,null, new Response.Listener<JSONObject>() {
             @Override

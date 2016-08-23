@@ -17,11 +17,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ListView
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/listView"
-                    android:padding="10dp" />
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corners"
+                        android:layout_margin="20dp"
+                        android:id="@+id/search_ll">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/search_et"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:hint="Search Here" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/search_icon"
+                            android:src="@drawable/search_icon"
+                            android:adjustViewBounds="true"
+                            android:padding="12dp" />
+                    </LinearLayout>
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listView"
+                        android:padding="10dp" />
+                </LinearLayout>
 
                 <ProgressBar
                     android:layout_width="wrap_content"
@@ -30,6 +61,11 @@
                     android:layout_centerInParent="true" />
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
