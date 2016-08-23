@@ -210,7 +210,10 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if(TITLES[position].equals("Videos"))
+
+            if(TITLES[position].equals("Home"))
+                return HomeFragment.newInstance(position,TITLES[position]);
+           else if(TITLES[position].equals("Videos"))
                 return VideoFragment.newInstance(position,TITLES[position]);
             else if(TITLES[position].equals("Gallery"))
                 return GalleryFragment.newInstance(position,TITLES[position]);
