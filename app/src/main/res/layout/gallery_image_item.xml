@@ -8,16 +8,42 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:background="#ffffff">
+        android:gravity="center_vertical">
 
-        <com.android.volley.toolbox.NetworkImageView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/news_img"
-            android:adjustViewBounds="false"
-            android:scaleType="centerCrop"
-            android:baselineAlignBottom="false" />
+            android:layout_height="150dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff">
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/news_img"
+                        android:adjustViewBounds="false"
+                        android:scaleType="centerCrop"
+                        android:baselineAlignBottom="false" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView4"
+                android:scaleType="centerCrop"
+                android:src="@drawable/rounded_corners_img" />
+        </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"

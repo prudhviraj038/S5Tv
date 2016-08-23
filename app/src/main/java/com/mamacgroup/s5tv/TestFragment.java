@@ -144,6 +144,7 @@ public class TestFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
+                    position --;
                     title.setText(newses.get(position).title);
                     description.setText(Html.fromHtml(newses.get(position).data));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
@@ -191,7 +192,7 @@ public class TestFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
         String url;
         if(position==0)
-             url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php";
+             url = "http://clients.outlinedesigns.in/s5tv/api/all-news-json.php";
         else
 
          url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php?type="+name.toLowerCase();
