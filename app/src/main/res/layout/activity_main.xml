@@ -225,222 +225,234 @@
             android:layout_height="match_parent"
             android:padding="20dp">
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <ExpandableListView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/news_ll">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="News"
-                    android:id="@+id/news_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_btn1"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:id="@+id/expandableListView" />
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/telangana_ll">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Telangana"
-                    android:id="@+id/telangana_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/news_ll">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_btn2"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false"
-                    android:focusableInTouchMode="false" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="News"
+                        android:id="@+id/news_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15sp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/ap_ll">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_btn1"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ap_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15dp"
-                    android:text="AP" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/telangana_ll">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_bn3"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Telangana"
+                        android:id="@+id/telangana_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/videos_ll">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_btn2"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false"
+                        android:focusableInTouchMode="false" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Videos"
-                    android:id="@+id/videos_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/ap_ll">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_btn4"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ap_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15dp"
+                        android:text="AP" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/sports_ll">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_bn3"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sports"
-                    android:id="@+id/sports_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/videos_ll">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_btn5"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Videos"
+                        android:id="@+id/videos_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/hyd_ll">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_btn4"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hyd"
-                    android:id="@+id/hyd_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/sports_ll">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_btn6"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sports"
+                        android:id="@+id/sports_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/cinema_ll">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_btn5"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cinema"
-                    android:id="@+id/cinema_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/hyd_ll">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_btn7"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false"
-                    android:visibility="invisible" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hyd"
+                        android:id="@+id/hyd_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/adults_ll">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_btn6"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Adults"
-                    android:id="@+id/adults_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/cinema_ll">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_btn8"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cinema"
+                        android:id="@+id/cinema_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:id="@+id/gallery_ll">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_btn7"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false"
+                        android:visibility="invisible" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gallery"
-                    android:id="@+id/gallery_tv"
-                    android:layout_weight="1"
-                    android:textColor="@color/aa_menu_text"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/adults_ll">
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:id="@+id/right_btn9"
-                    android:src="@drawable/right_btn_icon"
-                    android:adjustViewBounds="false" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Adults"
+                        android:id="@+id/adults_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15dp" />
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_btn8"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:id="@+id/gallery_ll">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gallery"
+                        android:id="@+id/gallery_tv"
+                        android:layout_weight="1"
+                        android:textColor="@color/aa_menu_text"
+                        android:textSize="15dp" />
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:id="@+id/right_btn9"
+                        android:src="@drawable/right_btn_icon"
+                        android:adjustViewBounds="false" />
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

@@ -15,17 +15,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.astuetz.PagerSlidingTabStrip;
 
 import org.json.JSONArray;
@@ -43,10 +40,11 @@ public class MainActivity extends FragmentActivity {
 
     private List<String> home_data;
     private List<String> news_data;
-
+    ExpandListAdapter expandListAdapter;
     ArrayList<MainCategory> mainCategories;
     private DrawerLayout mDrawerLayout;
     TextView live_txt;
+    ExpandableListView el;
     ImageView live_img,menu_btn;
     LinearLayout home,livetv,search,news,ap,telangana,sports,videos,hyd,cinema,adults,gallery,live_tv_ll_header;
 
@@ -56,6 +54,8 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainCategories = new ArrayList<>();
+        el=(ExpandableListView)findViewById(R.id.expandableListView);
+        el.setGroupIndicator(null);
         live_tv_ll_header = (LinearLayout)findViewById(R.id.livw_tv_ll);
         live_tv_ll_header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,6 +282,8 @@ public class MainActivity extends FragmentActivity {
                         JSONObject jsonObject1 = jsonObject.getJSONObject(i);
                         mainCategories.add(new MainCategory(jsonObject1));
                     }
+                    expandListAdapter=new ExpandListAdapter(MainActivity.this,mainCategories);
+                    el.setAdapter(expandListAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
