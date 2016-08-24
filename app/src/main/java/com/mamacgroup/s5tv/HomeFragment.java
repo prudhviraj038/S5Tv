@@ -71,12 +71,12 @@ public class HomeFragment extends Fragment {
             super.onCreate(savedInstanceState);
         position = getArguments().getInt(ARG_POSITION);
         }
-
+    Boolean have_header=true;
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = getView();
-        View header_view = getActivity().getLayoutInflater().inflate(R.layout.listview_full_header,null);
+        final View header_view = getActivity().getLayoutInflater().inflate(R.layout.listview_full_header,null);
         newses=new ArrayList<>();
         newses_mini = new ArrayList<>();
         name=(String)getArguments().getSerializable(ARG_NAME);
@@ -107,13 +107,20 @@ public class HomeFragment extends Fragment {
         search_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (search.getText()!=null)
-                get_news("?search="+search.getText().toString());
+                if (search.getText()!=null) {
+                    get_news("?search=" + search.getText().toString());
+                    listView.removeHeaderView(header_view);
+                    have_header=false;
+                }
                 else {
                     get_news("");
+                    header_view.setVisibility(View.VISIBLE);
+                    listView.addHeaderView(header_view);
+                    have_header=true;
                 }
             }
         });
+        have_header=true;
         serach_ll = (LinearLayout)view.findViewById(R.id.search_ll);
         serach_ll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,7 +206,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
+                    if(have_header)
                     position --;
+
                     title.setText(newses.get(position).title);
                     description.setText(Html.fromHtml(newses.get(position).data));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
@@ -268,7 +277,7 @@ public class HomeFragment extends Fragment {
                             if(newses_mini.size()<3)
                                 newses_mini.add(new News(jsonObject1));
                             else
-                            newses.add(new News(jsonObject1));
+                                 newses.add(new News(jsonObject1));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

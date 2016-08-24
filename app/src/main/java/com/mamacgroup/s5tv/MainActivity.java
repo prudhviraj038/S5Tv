@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +21,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.astuetz.PagerSlidingTabStrip;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,7 +44,7 @@ public class MainActivity extends FragmentActivity {
     private List<String> home_data;
     private List<String> news_data;
 
-
+    ArrayList<MainCategory> mainCategories;
     private DrawerLayout mDrawerLayout;
     TextView live_txt;
     ImageView live_img,menu_btn;
@@ -44,6 +55,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainCategories = new ArrayList<>();
         live_tv_ll_header = (LinearLayout)findViewById(R.id.livw_tv_ll);
         live_tv_ll_header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +192,7 @@ public class MainActivity extends FragmentActivity {
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
+        get_all_categories();
 
     }
 
@@ -247,5 +260,47 @@ public class MainActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void get_all_categories(){
+
+      //  progressBar.setVisibility(View.VISIBLE);
+        String url = "http://clients.outlinedesigns.in/s5tv/api/all-category-json.php";
+        Log.e("url", url);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray jsonObject) {
+                Log.e("response", jsonObject.toString());
+                /*if(progressDialog!=null)
+                    progressDialog.dismiss();
+                */
+              //  progressBar.setVisibility(View.GONE);
+             //   galleryCategories.clear();
+                try {
+                    for(int i=0;i<jsonObject.length();i++) {
+                        JSONObject jsonObject1 = jsonObject.getJSONObject(i);
+                        mainCategories.add(new MainCategory(jsonObject1));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+             //   galleryCatageoryAdapter = new GalleryCatageoryAdapter(getActivity(),galleryCategories);
+             //   gridView.setAdapter(galleryCatageoryAdapter);
+             //   galleryCatageoryAdapter.notifyDataSetChanged();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e("error", volleyError.toString());
+                //  progressBar.setVisibility(View.GONE);
+              /*  if(progressDialog!=null)
+                    progressDialog.dismiss();
+*/
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
+
     }
 }
