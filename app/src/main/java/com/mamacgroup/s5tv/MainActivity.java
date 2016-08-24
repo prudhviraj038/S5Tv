@@ -55,6 +55,14 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         mainCategories = new ArrayList<>();
         el=(ExpandableListView)findViewById(R.id.expandableListView);
+        el.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                pager.setCurrentItem(groupPosition);
+
+                return false;
+            }
+        });
         el.setGroupIndicator(null);
         live_tv_ll_header = (LinearLayout)findViewById(R.id.livw_tv_ll);
         live_tv_ll_header.setOnClickListener(new View.OnClickListener() {

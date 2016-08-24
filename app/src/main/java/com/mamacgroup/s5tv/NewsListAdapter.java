@@ -2,6 +2,7 @@ package com.mamacgroup.s5tv;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +58,7 @@ public class NewsListAdapter extends BaseAdapter{
         View rowView;
         rowView = inflater.inflate(R.layout.news_item, null);
         holder.title=(TextView) rowView.findViewById(R.id.news_tv);
-        holder.title.setText(newses.get(position).title);
+        holder.title.setText(Html.fromHtml(newses.get(position).title));
         holder.img=(NetworkImageView) rowView.findViewById(R.id.news_img);
         Log.e("img", newses.get(position).image);
       //  Picasso.with(context).load("http://image.flaticon.com/teams/1-freepik.jpg").into(holder.img);

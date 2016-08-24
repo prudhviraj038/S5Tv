@@ -145,7 +145,7 @@ public class TestFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     position --;
-                    title.setText(newses.get(position).title);
+                    title.setText(Html.fromHtml(newses.get(position).title));
                     description.setText(Html.fromHtml(newses.get(position).data));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
