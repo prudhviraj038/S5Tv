@@ -220,7 +220,6 @@ public class HomeFragment extends Fragment {
 
                     viewFlipper.setDisplayedChild(1);
 
-
                                     }catch (Exception ex){
 
                 }

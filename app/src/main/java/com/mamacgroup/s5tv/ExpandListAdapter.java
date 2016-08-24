@@ -24,7 +24,8 @@ ArrayList<MainCategory> mainCategories;
     }
 
     @Override
-    public void registerDataSetObserver(DataSetObserver dataSetObserver) {
+    public void registerDataSetObserver(DataSetObserver dataSetObserver)
+    {
 
     }
 
