@@ -52,7 +52,7 @@ public class GalleryFragment extends Fragment {
     TextView gallery_title,gallery_title2;
     TextView gallery_next,gallery_previous;
     private SliderLayout mDemoSlider;
-    public static GalleryFragment newInstance(int position,String name) {
+    public static GalleryFragment newInstance(int position, String name, String pos, String msg) {
         GalleryFragment f = new GalleryFragment();
         Bundle b = new Bundle();
         b.putInt(ARG_POSITION, position);

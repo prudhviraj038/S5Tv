@@ -52,7 +52,7 @@ public class VideoFragment extends Fragment {
     ProgressBar progressBar;
     TextView Video_title,Video_title2;
     private SliderLayout mDemoSlider;
-    public static VideoFragment newInstance(int position,String name) {
+    public static VideoFragment newInstance(int position, String name, String pos, String msg) {
         VideoFragment f = new VideoFragment();
         Bundle b = new Bundle();
         b.putInt(ARG_POSITION, position);

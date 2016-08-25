@@ -95,7 +95,7 @@ ArrayList<MainCategory> mainCategories;
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
-        return false;
+        return true;
     }
 
     @Override

@@ -42,28 +42,45 @@ public class MainActivity extends FragmentActivity {
     private List<String> news_data;
     ExpandListAdapter expandListAdapter;
     ArrayList<MainCategory> mainCategories;
+    ArrayList<String> mainCategories_menu;
+
     private DrawerLayout mDrawerLayout;
     TextView live_txt;
     ExpandableListView el;
     ImageView live_img,menu_btn;
     LinearLayout home,livetv,search,news,ap,telangana,sports,videos,hyd,cinema,adults,gallery,live_tv_ll_header;
+    String pos,msg;
+    HomeFragment homeFragment;
+    TestFragment testFragment;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pos="0";
+        msg="";
         mainCategories = new ArrayList<>();
         el=(ExpandableListView)findViewById(R.id.expandableListView);
         el.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                pager.setCurrentItem(groupPosition);
+                pager.setCurrentItem(groupPosition+1);
+                mDrawerLayout.closeDrawer(GravityCompat.START);
 
                 return false;
             }
         });
         el.setGroupIndicator(null);
+        mainCategories = (ArrayList<MainCategory>)getIntent().getSerializableExtra("data");
+        mainCategories_menu=new ArrayList<>();
+        mainCategories_menu.add("Home");
+        for(int i=0;i<mainCategories.size();i++){
+            mainCategories_menu.add(mainCategories.get(i).title);
+        }
+        expandListAdapter=new ExpandListAdapter(MainActivity.this,mainCategories);
+        el.setAdapter(expandListAdapter);
+
         live_tv_ll_header = (LinearLayout)findViewById(R.id.livw_tv_ll);
         live_tv_ll_header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +112,9 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View view) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 pager.setCurrentItem(0);
+                    homeFragment.reload_data();
+
+
             }
         });
         search = (LinearLayout)findViewById(R.id.search_ll);
@@ -102,8 +122,14 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
+                pager.setCurrentItem(0);
+
+                    homeFragment.reload_search();
+
+
             }
         });
+
         livetv = (LinearLayout)findViewById(R.id.livetv_ll);
         livetv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +142,7 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
+
         news = (LinearLayout)findViewById(R.id.news_ll);
         news.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,17 +224,21 @@ public class MainActivity extends FragmentActivity {
             }
         });
          pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+        myPagerAdapter =new  MyPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(myPagerAdapter);
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
-        get_all_categories();
+       // get_all_categories();
 
     }
 
     ViewPager pager;
+    MyPagerAdapter myPagerAdapter;
     private class MyPagerAdapter extends  FragmentPagerAdapter{
         //ap,adults, cinema , telangana , sports ,  video , gallery  , hyd
-        private final String[] TITLES = {
+
+
+        /*private final String[] TITLES = {
                 "Home",
                 "News",
                 "Telangana",
@@ -218,7 +249,7 @@ public class MainActivity extends FragmentActivity {
                 "HYD",
                 "Adults",
                 "Gallery"
-        };
+        };*/
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -226,25 +257,35 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return TITLES[position];
+            return mainCategories_menu.get(position);
         }
-
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
         @Override
         public Fragment getItem(int position) {
 
-            if(TITLES[position].equals("Home"))
-                return HomeFragment.newInstance(position,TITLES[position]);
-           else if(TITLES[position].equals("Videos"))
-                return VideoFragment.newInstance(position,TITLES[position]);
-            else if(TITLES[position].equals("Gallery"))
-                return GalleryFragment.newInstance(position,TITLES[position]);
-            else
-                return TestFragment.newInstance(position,TITLES[position]);
+            if(mainCategories_menu.get(position).equals("Home")) {
+                homeFragment = HomeFragment.newInstance(position, mainCategories_menu.get(position), pos, msg);
+                return homeFragment;
+
+            }
+           else if(mainCategories_menu.get(position).equals("Videos")) {
+                return VideoFragment.newInstance(position, mainCategories_menu.get(position), pos, msg);
+            }
+            else if(mainCategories_menu.get(position).equals("Gallery")) {
+                return GalleryFragment.newInstance(position, mainCategories_menu.get(position), pos, msg);
+            }
+            else {
+                testFragment = TestFragment.newInstance(position, mainCategories_menu.get(position), pos, msg);
+                return testFragment;
+            }
         }
 
         @Override
         public int getCount() {
-            return TITLES.length;
+            return mainCategories_menu.size();
         }
     }
 

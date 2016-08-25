@@ -48,11 +48,12 @@ public class Splash_Activity extends Activity {
         }, 2000);
 
 */
+
     get_all_categories();
     }
 
     private void get_all_categories(){
-
+        mainCategories=new ArrayList<>();
         //  progressBar.setVisibility(View.VISIBLE);
         String url = "http://clients.outlinedesigns.in/s5tv/api/all-category-json.php";
         Log.e("url", url);
@@ -70,7 +71,13 @@ public class Splash_Activity extends Activity {
                         JSONObject jsonObject1 = jsonObject.getJSONObject(i);
                         mainCategories.add(new MainCategory(jsonObject1));
                     }
-                                    } catch (JSONException e) {
+
+                    Intent intent = new Intent(Splash_Activity.this, MainActivity.class);
+                    intent.putExtra("data",mainCategories);
+                    startActivity(intent);
+                    finish();
+
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 //   galleryCatageoryAdapter = new GalleryCatageoryAdapter(getActivity(),galleryCategories);

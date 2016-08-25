@@ -39,6 +39,9 @@ public class TestFragment extends Fragment {
     ArrayList<News> newses;
     private static final String ARG_POSITION = "position";
     private static final String ARG_NAME = "name";
+    private static final String ARG_POS = "pos";
+    private static final String ARG_MSG = "msg";
+
     NewsListAdapter newsListAdapter;
     private int position;
     private String name;
@@ -49,7 +52,7 @@ public class TestFragment extends Fragment {
     ProgressBar progressBar;
     NetworkImageView header_news_image1,header_news_image2;
     TextView header_news_txt1,header_news_txt2;
-    public static TestFragment newInstance(int position,String name) {
+    public static TestFragment newInstance(int position, String name, String pos, String msg) {
         TestFragment f = new TestFragment();
         Bundle b = new Bundle();
         b.putInt(ARG_POSITION, position);
@@ -72,7 +75,7 @@ public class TestFragment extends Fragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
         View view = getView();
         View header_view = getActivity().getLayoutInflater().inflate(R.layout.listview_header,null);
         newses=new ArrayList<>();
@@ -96,7 +99,7 @@ public class TestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 viewFlipper.setDisplayedChild(1);
-                title.setText(newses_mini.get(0).title);
+                title.setText(Html.fromHtml(newses_mini.get(0).title));
                 description.setText(Html.fromHtml(newses_mini.get(0).data));
 
                 ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
@@ -120,7 +123,7 @@ public class TestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 viewFlipper.setDisplayedChild(1);
-                title.setText(newses_mini.get(1).title);
+                title.setText(Html.fromHtml(newses_mini.get(1).title));
                 description.setText(Html.fromHtml(newses_mini.get(1).data));
 
                 ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
@@ -220,7 +223,7 @@ public class TestFragment extends Fragment {
                 newsListAdapter=new NewsListAdapter(getActivity(),newses);
                 listView.setAdapter(newsListAdapter);
                 if(newses_mini.size()>0){
-                    header_news_txt1.setText(newses_mini.get(0).title);
+                    header_news_txt1.setText(Html.fromHtml(newses_mini.get(0).title));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses_mini.get(0).image, ImageLoader.getImageListener(header_news_image1,
@@ -230,7 +233,7 @@ public class TestFragment extends Fragment {
 
                 }
                 if(newses_mini.size()>1){
-                    header_news_txt2.setText(newses_mini.get(1).title);
+                    header_news_txt2.setText(Html.fromHtml(newses_mini.get(1).title));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses_mini.get(1).image, ImageLoader.getImageListener(header_news_image2,

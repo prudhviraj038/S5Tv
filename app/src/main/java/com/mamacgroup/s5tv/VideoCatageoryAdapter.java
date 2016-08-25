@@ -2,6 +2,7 @@ package com.mamacgroup.s5tv;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +57,7 @@ ArrayList<VideoCategory> videoCategories;
         View rowView;
         rowView = inflater.inflate(R.layout.video_cat_item, null);
         holder.title=(TextView) rowView.findViewById(R.id.video_news_tv);
-        holder.title.setText(videoCategories.get(position).title);
+        holder.title.setText(Html.fromHtml(videoCategories.get(position).title));
         holder.img=(NetworkImageView) rowView.findViewById(R.id.video_news_img);
         Log.e("img", videoCategories.get(position).image);
        // Picasso.with(context).load("http://image.flaticon.com/teams/1-freepik.jpg").into(holder.img);

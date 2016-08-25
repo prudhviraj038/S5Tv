@@ -6,7 +6,8 @@
     <ViewFlipper
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewFlipper" >
+        android:id="@+id/viewFlippern"
+        android:clickable="false">
 
         <LinearLayout
             android:orientation="vertical"
@@ -28,7 +29,8 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_corners"
                         android:layout_margin="20dp"
-                        android:id="@+id/search_ll">
+                        android:id="@+id/search_ll"
+                        android:visibility="gone">
 
                         <EditText
                             android:layout_width="wrap_content"
@@ -52,6 +54,13 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/listView"
                         android:padding="10dp" />
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listView_search"
+                        android:padding="10dp"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <ProgressBar
