@@ -276,7 +276,7 @@ public class HomeFragment extends Fragment {
                         ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                                 .getImageLoader();
                         imageLoader.get(newses.get(position).image, ImageLoader.getImageListener(imageView,
-                                R.drawable.nwessss, android.R.drawable
+                                R.drawable.logo, android.R.drawable
                                         .ic_dialog_alert));
                         imageView.setImageUrl(newses.get(position).image, imageLoader);
 
@@ -359,7 +359,7 @@ public class HomeFragment extends Fragment {
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses_mini.get(0).image, ImageLoader.getImageListener(header_news_imagefull,
-                            R.drawable.nwessss, android.R.drawable
+                            R.drawable.logo, android.R.drawable
                                     .ic_dialog_alert));
                     header_news_imagefull.setImageUrl(newses_mini.get(0).image, imageLoader);
 
@@ -370,7 +370,7 @@ public class HomeFragment extends Fragment {
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses_mini.get(1).image, ImageLoader.getImageListener(header_news_image1,
-                            R.drawable.nwessss, android.R.drawable
+                            R.drawable.logo, android.R.drawable
                                     .ic_dialog_alert));
                     header_news_image1.setImageUrl(newses_mini.get(1).image, imageLoader);
 
@@ -380,7 +380,7 @@ public class HomeFragment extends Fragment {
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses_mini.get(2).image, ImageLoader.getImageListener(header_news_image2,
-                            R.drawable.nwessss, android.R.drawable
+                            R.drawable.logo, android.R.drawable
                                     .ic_dialog_alert));
                     header_news_image2.setImageUrl(newses_mini.get(2).image, imageLoader);
 
