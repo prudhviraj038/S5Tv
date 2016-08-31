@@ -52,7 +52,8 @@ public class MainActivity extends FragmentActivity {
     String pos,msg;
     HomeFragment homeFragment;
     TestFragment testFragment;
-
+    HashMap<Integer,TestFragment> fragments;
+    ImageView header_logo;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +62,19 @@ public class MainActivity extends FragmentActivity {
         pos="0";
         msg="";
         mainCategories = new ArrayList<>();
+        header_logo = (ImageView) findViewById(R.id.header_logo);
+        header_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pager.setCurrentItem(0);
+            }
+        });
+        fragments = new HashMap<>();
         el=(ExpandableListView)findViewById(R.id.expandableListView);
         el.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                fragments.get(groupPosition+1).reload_data(groupPosition+1,mainCategories.get(groupPosition).chanels.get(childPosition).ch_id);
                 pager.setCurrentItem(groupPosition+1);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
 
@@ -77,6 +87,7 @@ public class MainActivity extends FragmentActivity {
         mainCategories_menu.add("Home");
         for(int i=0;i<mainCategories.size();i++){
             mainCategories_menu.add(mainCategories.get(i).title);
+            fragments.put(i+1,TestFragment.newInstance(i+1,mainCategories.get(i).type,"0",""));
         }
         expandListAdapter=new ExpandListAdapter(MainActivity.this,mainCategories);
         el.setAdapter(expandListAdapter);
@@ -278,8 +289,7 @@ public class MainActivity extends FragmentActivity {
                 return GalleryFragment.newInstance(position, mainCategories_menu.get(position), pos, msg);
             }
             else {
-                testFragment = TestFragment.newInstance(position, mainCategories_menu.get(position), pos, msg);
-                return testFragment;
+                return fragments.get(position);
             }
         }
 

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -39,7 +40,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_NAME = "name";
     private static final String ARG_POS = "pos";
     private static final String ARG_MSG = "msg";
-
+    ScrollView scrollView;
     NewsListAdapter newsListAdapter;
     private int position;
     private String name;
@@ -105,7 +106,12 @@ public class HomeFragment extends Fragment {
         msg=(String)getArguments().getSerializable(ARG_MSG );
         Log.e("name", name);
         Log.e("msg", msg);
+        if(name.equals("Hyderabad"))
+            name="hyd";
+        Log.e("name", name);
+
         TextView label = (TextView) view.findViewById(R.id.label);
+        scrollView = (ScrollView) view.findViewById(R.id.scrollView);
         progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
         title = (TextView) view.findViewById(R.id.title_details);
         description = (TextView) view.findViewById(R.id.descr_details);
@@ -172,6 +178,13 @@ public class HomeFragment extends Fragment {
                         imageView.setImageUrl(newses.get(position).image, imageLoader);
 
                         viewFlipper.setDisplayedChild(1);
+                        scrollView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                scrollView.fullScroll(View.FOCUS_UP);
+                            }
+                        });
+
 
                     }catch (Exception ex){
 
@@ -205,6 +218,13 @@ public class HomeFragment extends Fragment {
                             R.drawable.nwessss, android.R.drawable
                                     .ic_dialog_alert));
                     imageView.setImageUrl(newses_mini.get(0).image, imageLoader);
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
+
 
 
                 }
@@ -229,6 +249,13 @@ public class HomeFragment extends Fragment {
                             R.drawable.nwessss, android.R.drawable
                                     .ic_dialog_alert));
                     imageView.setImageUrl(newses_mini.get(1).image, imageLoader);
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
+
 
 
                 }
@@ -253,6 +280,13 @@ public class HomeFragment extends Fragment {
                             R.drawable.nwessss, android.R.drawable
                                     .ic_dialog_alert));
                     imageView.setImageUrl(newses_mini.get(2).image, imageLoader);
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
+
 
                 }
             });
@@ -281,6 +315,13 @@ public class HomeFragment extends Fragment {
                         imageView.setImageUrl(newses.get(position).image, imageLoader);
 
                         viewFlipper.setDisplayedChild(1);
+                        scrollView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                scrollView.fullScroll(View.FOCUS_UP);
+                            }
+                        });
+
 
                     }catch (Exception ex){
 
@@ -304,6 +345,13 @@ public class HomeFragment extends Fragment {
                     imageView.setImageUrl(newses.get(position).image, imageLoader);
 
                     viewFlipper.setDisplayedChild(1);
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
+
 
                 }catch (Exception ex){
 

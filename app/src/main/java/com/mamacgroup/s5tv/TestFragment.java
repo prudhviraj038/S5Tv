@@ -3,6 +3,7 @@ package com.mamacgroup.s5tv;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.renderscript.Script;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -30,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 /**
  * Created by HP on 7/26/2016.
@@ -44,7 +47,7 @@ public class TestFragment extends Fragment {
 
     NewsListAdapter newsListAdapter;
     private int position;
-    private String name;
+    public String name,cat;
     ListView listView;
     ViewFlipper viewFlipper;
     TextView title,description,date,author;
@@ -52,6 +55,7 @@ public class TestFragment extends Fragment {
     ProgressBar progressBar;
     NetworkImageView header_news_image1,header_news_image2;
     TextView header_news_txt1,header_news_txt2;
+    ScrollView scrollView;
     public static TestFragment newInstance(int position, String name, String pos, String msg) {
         TestFragment f = new TestFragment();
         Bundle b = new Bundle();
@@ -61,6 +65,13 @@ public class TestFragment extends Fragment {
         return f;
     }
 
+    public void reload_data(int  pos,String msg){
+        Log.e(String.valueOf(pos),String.valueOf(position));
+        if(pos==position){
+            get_news("&category="+msg);
+        }
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,7 +92,8 @@ public class TestFragment extends Fragment {
         newses=new ArrayList<>();
         newses_mini = new ArrayList<>();
         name=(String)getArguments().getSerializable(ARG_NAME);
-        Log.e("name", name);
+
+        scrollView = (ScrollView) view.findViewById(R.id.scrollView);
         TextView label = (TextView) view.findViewById(R.id.label);
         progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
         title = (TextView) view.findViewById(R.id.title_details);
@@ -108,6 +120,13 @@ public class TestFragment extends Fragment {
                         R.drawable.nwessss, android.R.drawable
                                 .ic_dialog_alert));
                 imageView.setImageUrl(newses_mini.get(0).image, imageLoader);
+                scrollView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollView.fullScroll(View.FOCUS_UP);
+                    }
+                });
+
 
 
             }
@@ -132,6 +151,13 @@ public class TestFragment extends Fragment {
                         R.drawable.nwessss, android.R.drawable
                                 .ic_dialog_alert));
                 imageView.setImageUrl(newses_mini.get(1).image, imageLoader);
+                scrollView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollView.fullScroll(View.FOCUS_UP);
+                    }
+                });
+
 
             }
         });
@@ -158,15 +184,21 @@ public class TestFragment extends Fragment {
                     imageView.setImageUrl(newses.get(position).image, imageLoader);
 
                     viewFlipper.setDisplayedChild(1);
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.fullScroll(View.FOCUS_UP);
+                        }
+                    });
 
 
-                                    }catch (Exception ex){
+                }catch (Exception ex){
 
                 }
 
             }
         });
-        get_news();
+        get_news("");
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -185,7 +217,7 @@ public class TestFragment extends Fragment {
 
      }
 
-    private void get_news(){
+    private void get_news(String append){
        /* final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("please_wait");
         progressDialog.show();
@@ -194,12 +226,11 @@ public class TestFragment extends Fragment {
        */
         progressBar.setVisibility(View.VISIBLE);
         String url;
-        if(position==0)
-             url = "http://clients.outlinedesigns.in/s5tv/api/all-news-json.php";
-        else
-
-         url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php?type="+name.toLowerCase();
+        url = "http://clients.outlinedesigns.in/s5tv/api/news-json.php?type="+name.toLowerCase();
+        url=url+append;
         Log.e("url", url);
+
+
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET,url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -209,6 +240,7 @@ public class TestFragment extends Fragment {
                 */
                 progressBar.setVisibility(View.GONE);
                 newses.clear();
+                newses_mini.clear();
                     try {
                         for(int i=0;i<jsonObject.getJSONArray("categories").length();i++) {
                             JSONObject jsonObject1 = jsonObject.getJSONArray("categories").getJSONObject(i);

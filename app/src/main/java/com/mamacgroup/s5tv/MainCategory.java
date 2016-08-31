@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by Chinni on 30-07-2016.
  */
 public class MainCategory implements Serializable {
-    String id,title,title_te,image,data,data_te,link,is_urgent,now;
+    String id,title,title_te,image,data,data_te,link,is_urgent,now,type;
    ArrayList<Chanel>  chanels;
 
     MainCategory(JSONObject jsonObject){
@@ -28,6 +28,7 @@ public class MainCategory implements Serializable {
 //            link=jsonObject.getString("link");
 //            is_urgent=jsonObject.getString("is_urgent");
 //            now=jsonObject.getString("times");
+            type=jsonObject.getString("type");
 //            JSONObject jsonObject2 =jsonObject.getJSONObject("chanel");
             JSONArray jsonArray = jsonObject.getJSONArray("category");
             chanels = new ArrayList<>();

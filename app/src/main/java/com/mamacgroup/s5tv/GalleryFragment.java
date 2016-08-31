@@ -131,13 +131,13 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 viewFlipper.setDisplayedChild(2);
-                  ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
+                 /* ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                         .getImageLoader();
                 imageLoader.get(galleryImages.get(position).image, ImageLoader.getImageListener(imageView,
                         R.drawable.nwessss, android.R.drawable
                                 .ic_dialog_alert));
                 imageView.setImageUrl(galleryImages.get(position).image, imageLoader);
-               // mDemoSlider.setCurrentPosition(position);
+*/                mPager.setCurrentItem(position);
 
             }
         });

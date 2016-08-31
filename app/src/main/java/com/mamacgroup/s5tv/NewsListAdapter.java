@@ -60,7 +60,6 @@ public class NewsListAdapter extends BaseAdapter{
         holder.title=(TextView) rowView.findViewById(R.id.news_tv);
         holder.title.setText(Html.fromHtml(newses.get(position).title));
         holder.img=(NetworkImageView) rowView.findViewById(R.id.news_img);
-        Log.e("img", newses.get(position).image);
       //  Picasso.with(context).load("http://image.flaticon.com/teams/1-freepik.jpg").into(holder.img);
 
     ImageLoader imageLoader = CustomVolleyRequest.getInstance(context)
