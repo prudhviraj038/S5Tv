@@ -1,9 +1,13 @@
 package com.mamacgroup.s5tv;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,7 +52,7 @@ public class MainActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
     TextView live_txt;
     ExpandableListView el;
-    ImageView live_img,menu_btn;
+    ImageView live_img,menu_btn,language_btn;
     LinearLayout home,livetv,search,news,ap,telangana,sports,videos,hyd,cinema,adults,gallery,live_tv_ll_header;
     String pos,msg;
     HomeFragment homeFragment;
@@ -234,7 +239,18 @@ public class MainActivity extends FragmentActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
-         pager = (ViewPager) findViewById(R.id.pager);
+
+        language_btn = (ImageView) findViewById(R.id.change_language);
+        language_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //mDrawerLayout.openDrawer(GravityCompat.START);
+                show_alert();
+
+            }
+        });
+
+        pager = (ViewPager) findViewById(R.id.pager);
         myPagerAdapter =new  MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(myPagerAdapter);
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -364,4 +380,48 @@ public class MainActivity extends FragmentActivity {
         AppController.getInstance().addToRequestQueue(jsonArrayRequest);
 
     }
+
+    ArrayList<String> langs;
+
+    public void show_alert(){
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        langs = new ArrayList<>();
+        langs.add("English");
+        langs.add("Telugu");
+        AlertDialog.Builder alert1 = new AlertDialog.Builder(this);
+        alert1.setTitle("In which language you like to read news?");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, langs);
+        alert1.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                if (i == 0) {
+                    //Session.set_user_language(SettingsActivity.this, "en");
+                    editor.putString("lan","en");
+                    editor.commit();
+                    Intent intent = new Intent(getApplicationContext(), Splash_Activity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                   // Session.set_user_language(SettingsActivity.this, "ar");
+                    editor.putString("lan","te");
+                    editor.commit();
+
+                    Intent intent = new Intent(getApplicationContext(), Splash_Activity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+
+        });
+        final AlertDialog dialog = alert1.create();
+       // dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
+        dialog.show();
+    }
+
 }

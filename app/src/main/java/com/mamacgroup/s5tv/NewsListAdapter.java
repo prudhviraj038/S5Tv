@@ -58,7 +58,9 @@ public class NewsListAdapter extends BaseAdapter{
         View rowView;
         rowView = inflater.inflate(R.layout.news_item, null);
         holder.title=(TextView) rowView.findViewById(R.id.news_tv);
-        holder.title.setText(Html.fromHtml(newses.get(position).title));
+
+        holder.title.setText(Html.fromHtml(newses.get(position).getTitle()));
+
         holder.img=(NetworkImageView) rowView.findViewById(R.id.news_img);
       //  Picasso.with(context).load("http://image.flaticon.com/teams/1-freepik.jpg").into(holder.img);
 

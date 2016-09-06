@@ -168,8 +168,8 @@ public class HomeFragment extends Fragment {
                     try {
 
 
-                        title.setText(Html.fromHtml(newses.get(position).title));
-                        description.setText(Html.fromHtml(newses.get(position).data));
+                        title.setText(Html.fromHtml(newses.get(position).getTitle()));
+                        description.setText(Html.fromHtml(newses.get(position).getData()));
                         ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                                 .getImageLoader();
                         imageLoader.get(newses.get(position).image, ImageLoader.getImageListener(imageView,
@@ -209,8 +209,8 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     viewFlipper.setDisplayedChild(1);
-                    title.setText(Html.fromHtml(newses_mini.get(0).title));
-                    description.setText(Html.fromHtml(newses_mini.get(0).data));
+                    title.setText(Html.fromHtml(newses_mini.get(0).getTitle()));
+                    description.setText(Html.fromHtml(newses_mini.get(0).getData()));
 
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
@@ -240,8 +240,8 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     viewFlipper.setDisplayedChild(1);
-                    title.setText(Html.fromHtml(newses_mini.get(1).title));
-                    description.setText(Html.fromHtml(newses_mini.get(1).data));
+                    title.setText(Html.fromHtml(newses_mini.get(1).getTitle()));
+                    description.setText(Html.fromHtml(newses_mini.get(1).getData()));
 
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
@@ -271,8 +271,8 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     viewFlipper.setDisplayedChild(1);
-                    title.setText(Html.fromHtml(newses_mini.get(2).title));
-                    description.setText(Html.fromHtml(newses_mini.get(2).data));
+                    title.setText(Html.fromHtml(newses_mini.get(2).getTitle()));
+                    description.setText(Html.fromHtml(newses_mini.get(2).getData()));
 
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
@@ -305,8 +305,8 @@ public class HomeFragment extends Fragment {
                     try {
 
                         position --;
-                        title.setText(Html.fromHtml(newses.get(position).title));
-                        description.setText(Html.fromHtml(newses.get(position).data));
+                        title.setText(Html.fromHtml(newses.get(position).getTitle()));
+                        description.setText(Html.fromHtml(newses.get(position).getData()));
                         ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                                 .getImageLoader();
                         imageLoader.get(newses.get(position).image, ImageLoader.getImageListener(imageView,
@@ -335,8 +335,8 @@ public class HomeFragment extends Fragment {
                 try {
 
 
-                    title.setText(Html.fromHtml(newses.get(position).title));
-                    description.setText(Html.fromHtml(newses.get(position).data));
+                    title.setText(Html.fromHtml(newses.get(position).getTitle()));
+                    description.setText(Html.fromHtml(newses.get(position).getData()));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses.get(position).image, ImageLoader.getImageListener(imageView,
@@ -393,9 +393,9 @@ public class HomeFragment extends Fragment {
                         for(int i=0;i<jsonObject.getJSONArray("categories").length();i++) {
                             JSONObject jsonObject1 = jsonObject.getJSONArray("categories").getJSONObject(i);
                             if(newses_mini.size()<3)
-                                newses_mini.add(new News(jsonObject1));
+                                newses_mini.add(new News(jsonObject1,getActivity()));
                             else
-                                 newses.add(new News(jsonObject1));
+                                 newses.add(new News(jsonObject1,getActivity()));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -403,7 +403,7 @@ public class HomeFragment extends Fragment {
                 newsListAdapter=new NewsListAdapter(getActivity(),newses);
                 listView.setAdapter(newsListAdapter);
                 if(newses_mini.size()>0){
-                    header_news_txtfull.setText(Html.fromHtml(newses_mini.get(0).title));
+                    header_news_txtfull.setText(Html.fromHtml(newses_mini.get(0).getTitle()));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses_mini.get(0).image, ImageLoader.getImageListener(header_news_imagefull,
@@ -414,7 +414,7 @@ public class HomeFragment extends Fragment {
                 }
 
                 if(newses_mini.size()>1){
-                    header_news_txt1.setText(Html.fromHtml(newses_mini.get(1).title));
+                    header_news_txt1.setText(Html.fromHtml(newses_mini.get(1).getTitle()));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses_mini.get(1).image, ImageLoader.getImageListener(header_news_image1,
@@ -424,7 +424,7 @@ public class HomeFragment extends Fragment {
 
                 }
                 if(newses_mini.size()>2){
-                    header_news_txt2.setText(Html.fromHtml(newses_mini.get(2).title));
+                    header_news_txt2.setText(Html.fromHtml(newses_mini.get(2).getTitle()));
                     ImageLoader imageLoader = CustomVolleyRequest.getInstance(getActivity())
                             .getImageLoader();
                     imageLoader.get(newses_mini.get(2).image, ImageLoader.getImageListener(header_news_image2,
@@ -474,7 +474,7 @@ public class HomeFragment extends Fragment {
                 try {
                     for(int i=0;i<jsonObject.getJSONArray("categories").length();i++) {
                         JSONObject jsonObject1 = jsonObject.getJSONArray("categories").getJSONObject(i);
-                                                    newses.add(new News(jsonObject1));
+                                                    newses.add(new News(jsonObject1,getActivity()));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

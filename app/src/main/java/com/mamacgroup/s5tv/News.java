@@ -1,5 +1,9 @@
 package com.mamacgroup.s5tv;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,20 +13,40 @@ import java.io.Serializable;
  * Created by Chinni on 30-07-2016.
  */
 public class News implements Serializable {
-    String id,title,title_te,image,data,data_te,link,is_urgent,now;
+    String id,mtitle,mtitle_te,image,mdata,mdata_te,link,is_urgent,now;
+    Context context;
+    SharedPreferences sharedPreferences;
    // Chanel chanels;
 
-    News(JSONObject jsonObject){
+    public String getTitle(){
+
+
+        if(sharedPreferences.getString("lan","en").equals("en"))
+        return  mtitle;
+        else
+            return mtitle_te;
+    }
+    public String getData(){
+        if(sharedPreferences.getString("lan","en").equals("en"))
+            return  mdata;
+        else
+            return mdata_te;
+    }
+
+
+    News(JSONObject jsonObject, Context context){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         image="";
-        title="";
-        title_te="";
+        mtitle="";
+        mtitle_te="";
+        this.context = context;
         try {
 //            id=jsonObject.getString("id");
-            title=jsonObject.getString("title");
-            title_te=jsonObject.getString("title_te");
+            mtitle=jsonObject.getString("title");
+            mtitle_te=jsonObject.getString("title_te");
             image=jsonObject.getString("image");
-            data=jsonObject.getString("description");
-            data_te=jsonObject.getString("description_te");
+            mdata=jsonObject.getString("description");
+            mdata_te=jsonObject.getString("description_te");
 //            link=jsonObject.getString("link");
 //            is_urgent=jsonObject.getString("is_urgent");
 //            now=jsonObject.getString("times");

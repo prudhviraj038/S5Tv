@@ -19,8 +19,9 @@ public class VideoCategory implements Serializable {
         try {
             id=jsonObject.getString("id");
             title=jsonObject.getString("title");
+
         //    title_te=jsonObject.getString("title_te");
-         //   image=jsonObject.getString("image");
+            image=jsonObject.getString("image");
           //  data=jsonObject.getString("description");
          //   data_te=jsonObject.getString("description_te");
 //            link=jsonObject.getString("link");
