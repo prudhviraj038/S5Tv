@@ -25,6 +25,48 @@
                     android:layout_height="match_parent"
                     android:padding="3dp">
 
+                    <WebView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:id="@+id/webView" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView866"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/rounded_corners_img" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="5dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="2.5dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="3dp">
+
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"

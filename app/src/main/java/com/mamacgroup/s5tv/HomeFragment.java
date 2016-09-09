@@ -8,6 +8,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -151,13 +153,12 @@ public class HomeFragment extends Fragment {
             search_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (search.getText()!=null) {
+                    if (search.getText() != null) {
                         get_search_news("?search=" + search.getText().toString());
-                        have_header=false;
-                    }
-                    else {
+                        have_header = false;
+                    } else {
                         get_news("");
-                        have_header=true;
+                        have_header = true;
                     }
                 }
             });
@@ -186,7 +187,7 @@ public class HomeFragment extends Fragment {
                         });
 
 
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
 
                     }
 
@@ -198,7 +199,10 @@ public class HomeFragment extends Fragment {
 
             listView.addHeaderView(header_view);
             serach_ll = (LinearLayout)view.findViewById(R.id.search_ll);
-
+            WebView webView = (WebView)header_view.findViewById(R.id.webView);
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl("https://www.youtube.com/embed/PLQWG4VdLKw");
             header_news_imagefull = (NetworkImageView) header_view.findViewById(R.id.header_news_fullimage1);
             header_news_image1 = (NetworkImageView) header_view.findViewById(R.id.header_news_image1);
             header_news_image2 = (NetworkImageView) header_view.findViewById(R.id.header_newsimage2);
