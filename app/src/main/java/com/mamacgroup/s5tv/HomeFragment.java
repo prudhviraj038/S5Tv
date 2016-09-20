@@ -202,7 +202,7 @@ public class HomeFragment extends Fragment {
             WebView webView = (WebView)header_view.findViewById(R.id.webView);
             webView.getSettings().setJavaScriptEnabled(true);
             webView.setWebViewClient(new WebViewClient());
-            webView.loadUrl("https://www.youtube.com/embed/PLQWG4VdLKw");
+            webView.loadUrl("https://www.youtube.com/embed/1TWSuACD6os");
             header_news_imagefull = (NetworkImageView) header_view.findViewById(R.id.header_news_fullimage1);
             header_news_image1 = (NetworkImageView) header_view.findViewById(R.id.header_news_image1);
             header_news_image2 = (NetworkImageView) header_view.findViewById(R.id.header_newsimage2);
